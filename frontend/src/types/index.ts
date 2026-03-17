@@ -1,6 +1,6 @@
 /**
  * Shared TypeScript types for the application.
- * 
+ *
  * These types are used across islands, components, and API interactions.
  */
 
@@ -35,4 +35,31 @@ export interface ApiError {
  */
 export type IslandProps<T = unknown> = {
   initialData?: T
+}
+
+/**
+ * Game save record from the API.
+ */
+export interface GameSave {
+  id: number
+  slot_number: number
+  slot_name: string
+  score: number
+  high_score: number
+  level: number
+  lives: number
+  created_at: string
+  updated_at: string
+}
+
+/**
+ * Request payload for creating/updating a game save.
+ */
+export interface GameSaveCreate {
+  slot_number: number
+  slot_name: string
+  score: number
+  high_score: number
+  level: number
+  lives: number
 }

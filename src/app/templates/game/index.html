@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Dig Dug — Classic Arcade{% endblock %}
+
+{% block content %}
+<main class="flex flex-col items-center min-h-screen bg-black py-4">
+    <div data-island="digdug" class="w-full max-w-2xl">
+        <noscript>
+            <p class="text-gray-400 text-center">JavaScript is required to play Dig Dug.</p>
+        </noscript>
+        <div class="animate-pulse text-center text-gray-500 py-20">
+            Loading game...
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -28,7 +28,7 @@ We will implement a new "Comic" feature module:
 -   `src/app/config.py`: Add `HF_API_TOKEN` configuration.
 -   `src/app/views/__init__.py`: Register the new `comic_bp`.
 -   `frontend/src/main.ts`: Register the `comic-generator` island.
--   `src/app/templates/base.html`: Add navigation link (optional, or just access via URL).
+-   `src/app/templates/base.html`: Add navigation link to the header/nav.
 
 ### New Files
 -   `src/app/schemas/comic.py`: Pydantic models for request/response.
@@ -94,6 +94,7 @@ Register the module, add navigation, and verify with E2E tests.
 -   Create `src/app/templates/comic/index.html`.
 -   Extend `base.html`.
 -   Add a container with `data-island="comic-generator"`.
+-   Update `src/app/templates/base.html` to include a navigation link to `/comic` in the main header.
 
 ### 7. Create Frontend Island
 -   Create directory `frontend/src/islands/comic/`.

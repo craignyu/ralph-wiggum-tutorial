@@ -98,8 +98,7 @@ Execute every command to validate the feature works correctly with zero regressi
 <optionally list any additional notes, future considerations, or context that are relevant to the feature that will be helpful to the developer>
 ```
 
-## Feature
-Extract the feature details from the `issue_json` variable (parse the JSON and use the title and body fields).
+IMPORTANT create this spec file in the `specs/` directory with a descriptive name that includes the feature name and a unique identifier (e.g., `specs/issue-456-adw-xyz789-sdlc_planner-add-auth-system.md`).
 
 ## Report
 - Summarize the work you've just done in a concise bullet point list.

@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field, ConfigDict
 
 
 class HelloCreate(BaseModel):
+
     """Schema for creating a new Hello record.
 
     Validates incoming request data for POST /api/hello.
@@ -15,7 +16,8 @@ class HelloCreate(BaseModel):
     message: str = Field(..., min_length=1, max_length=255, description="Greeting message text")
 
 
-class HelloResponse(BaseModel):  # type: ignore[misc]
+class HelloResponse(BaseModel):
+
     """Schema for Hello response serialization.
 
     Used to serialize Hello model instances for API responses.

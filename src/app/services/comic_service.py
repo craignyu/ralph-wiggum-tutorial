@@ -11,7 +11,7 @@ import re
 from typing import Any
 from flask import current_app
 from huggingface_hub import InferenceClient
-from huggingface_hub.utils import HfHubHTTPError
+from huggingface_hub.utils import HfHubHTTPError  # type: ignore[attr-defined]
 
 from ..schemas.comic import ComicPanel, ComicResponse
 

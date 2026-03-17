@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from .base import db
 
 
-class Hello(db.Model):
+class Hello(db.Model):  # type: ignore[name-defined,misc]
     """Hello model representing a greeting message.
 
     Attributes:

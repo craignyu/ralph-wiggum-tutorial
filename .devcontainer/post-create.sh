@@ -1,12 +1,10 @@
 #!/bin/bash
-# Post-create script for devcontainer
-# Runs script/setup after container creation
+# post-create.sh - Runs when user opens a codespace (after prebuild snapshot)
+# Keep this lightweight — only user-specific setup that can't be prebuilt.
 
 set -e
 
-echo "installing copilot"
-npm install -g @github/copilot
+echo "==> Installing pre-commit hooks..."
+pre-commit install 2>/dev/null || echo "Pre-commit not configured yet"
 
-echo "Running post-create setup..."
-script/setup
-echo "Post-create setup complete!"
+echo "==> post-create complete!"

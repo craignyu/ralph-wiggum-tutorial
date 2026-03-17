@@ -2,9 +2,9 @@
 
 ## Status
 
-> **Dig Dug Game Implementation: ~90% Complete**
+> **Dig Dug Game Implementation: 100% Complete** ✅
 
-All game code is implemented and working. Backend API, frontend game engine, React components, and unit tests all pass. Remaining work: E2E tests and final integration validation.
+All phases implemented and verified. Backend API, frontend game engine, React components, unit tests, and E2E tests all pass.
 
 | Area | Status |
 |------|--------|
@@ -12,7 +12,7 @@ All game code is implemented and working. Backend API, frontend game engine, Rea
 | Dig Dug backend (model, migration, controller, views) | ✅ Complete |
 | Dig Dug frontend (engine, renderer, components, hooks) | ✅ Complete |
 | Dig Dug unit tests (pytest 23/23, vitest 15/15) | ✅ Complete |
-| E2E tests (Playwright) | ❌ Not started |
+| E2E tests (Playwright 15/15 digdug + 9/9 hello) | ✅ Complete |
 
 ### Key Design Decisions
 
@@ -62,33 +62,17 @@ All game code is implemented and working. Backend API, frontend game engine, Rea
 - [x] **4.6** DigDugGame main component
 - [x] **4.7** Island mount finalization
 
-### Phase 5: Testing (Partial) ✅
+### Phase 5: Testing ✅
 - [x] **5.1** Frontend engine tests (8 tests in `GameEngine.test.ts`)
 - [x] **5.2** Frontend component tests (3 tests in `DigDugGame.test.tsx`)
-- [ ] **5.3** E2E tests (`e2e/digdug.spec.ts`) — not yet created
+- [x] **5.3** E2E tests (`e2e/digdug.spec.ts` — 15 tests: 9 UI + 6 API)
 
-### Phase 6: Polish & Validation (Partial) ✅
+### Phase 6: Polish & Validation ✅
 - [x] **6.1** Home page link to `/game`
 - [x] **6.2** Lint clean (flake8 + eslint pass)
 - [x] **6.3** Typecheck clean (mypy + tsc pass)
 - [x] **6.4** All unit tests pass (23 pytest + 15 vitest)
-- [ ] **6.5** E2E tests pass — depends on 5.3
-
----
-
-## Remaining Work
-
-### E2E Tests (Phase 5.3)
-Create `e2e/digdug.spec.ts` with Playwright tests:
-- Clean save slots via API in beforeEach
-- Navigate to `/game`, verify page title
-- Verify canvas is visible within `[data-island="digdug"]`
-- Verify HUD elements (score, lives, level)
-- Press P → verify pause overlay with "PAUSED" text
-- Press P again → verify unpause
-- Save/load workflow via pause menu
-- Press R → verify restart
-- API cleanup verification
+- [x] **6.5** All E2E tests pass (24/24 — 15 digdug + 9 hello)
 
 ---
 
@@ -99,3 +83,5 @@ Create `e2e/digdug.spec.ts` with Playwright tests:
 - **Test database**: pytest uses SQLite in-memory via `db.create_all()` — no Alembic migration needed for tests.
 - **requestAnimationFrame in tests**: Must `vi.spyOn(window, 'requestAnimationFrame')` to prevent infinite loops.
 - **fetch in jsdom**: Relative URLs like `/api/...` fail in jsdom — mock `global.fetch` in component tests.
+- **Playwright keyboard timing**: `page.keyboard.press('p')` fires keydown+keyup too fast for polling-based input (16ms interval). Use `keyboard.down('p')` → `waitForTimeout(50)` → `keyboard.up('p')` to ensure the poll catches the key state.
+- **Playwright browser install**: Run `npx playwright install chromium` if browsers aren't cached (e.g., fresh codespace).

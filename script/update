@@ -1,0 +1,19 @@
+#!/bin/bash
+# script/update - Update dependencies
+#
+# Updates both Python and Node.js dependencies to their latest compatible versions.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Updating Python dependencies..."
+pip install --upgrade -r requirements.txt
+pip install --upgrade -r requirements-dev.txt
+
+echo ""
+echo "==> Updating Node.js dependencies..."
+cd frontend && npm update
+
+echo ""
+echo "==> Dependencies updated!"

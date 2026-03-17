@@ -1,0 +1,19 @@
+#!/bin/bash
+# script/bootstrap - Install system dependencies
+#
+# This script installs all dependencies needed to run the application.
+# It's designed to be idempotent - safe to run multiple times.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Installing Python dependencies..."
+pip install -q -r requirements.txt
+pip install -q -r requirements-dev.txt
+
+echo "==> Installing Node.js dependencies..."
+cd frontend && npm install --silent
+cd ..
+
+echo "==> Bootstrap complete!"

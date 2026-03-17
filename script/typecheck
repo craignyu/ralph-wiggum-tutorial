@@ -1,0 +1,19 @@
+#!/bin/bash
+# script/typecheck - Run type checkers
+#
+# Runs mypy for Python and tsc for TypeScript.
+# Exits with non-zero if any type errors are found.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Running Python type checker (mypy)..."
+mypy src/
+
+echo ""
+echo "==> Running TypeScript type checker..."
+cd frontend && npm run typecheck
+
+echo ""
+echo "==> All type checks passed!"

@@ -1,0 +1,19 @@
+#!/bin/bash
+# script/console - Open Flask shell
+#
+# Starts an interactive Python shell with the Flask app context loaded.
+# Useful for debugging, database queries, and testing.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# Load environment
+if [ -f .env ]; then
+    export $(grep -v '^#' .env | xargs)
+fi
+
+export FLASK_APP=src/app:create_app
+
+echo "==> Starting Flask shell..."
+flask shell

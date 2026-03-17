@@ -1,0 +1,37 @@
+#!/bin/bash
+# script/setup - Set up application for the first time after cloning
+#
+# This script handles all first-time setup:
+# - Installs dependencies (via bootstrap)
+# - Creates .env from template
+# - Sets up database
+# - Runs migrations
+# - Installs pre-commit hooks
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# Install dependencies
+script/bootstrap
+
+# Create .env if it doesn't exist
+if [ ! -f .env ]; then
+    echo "==> Creating .env from template..."
+    cp .env.example .env
+fi
+
+# Create database if it doesn't exist (PostgreSQL)
+echo "==> Setting up database..."
+createdb app 2>/dev/null || echo "Database 'app' already exists or not using local PostgreSQL"
+
+# Run database migrations
+echo "==> Running database migrations..."
+export FLASK_APP=src/app:create_app
+flask db upgrade 2>/dev/null || echo "No migrations to apply yet"
+
+# Install pre-commit hooks
+echo "==> Installing pre-commit hooks..."
+pre-commit install 2>/dev/null || echo "Pre-commit not configured yet"
+
+echo "==> Setup complete! Run 'script/server' to start the application."

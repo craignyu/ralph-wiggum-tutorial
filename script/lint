@@ -1,0 +1,19 @@
+#!/bin/bash
+# script/lint - Run all linters
+#
+# Runs flake8 for Python and ESLint for TypeScript/React.
+# Exits with non-zero if any linting errors are found.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Running Python linter (flake8)..."
+flake8 src/ tests/
+
+echo ""
+echo "==> Running JavaScript linter (ESLint)..."
+cd frontend && npm run lint
+
+echo ""
+echo "==> All linting passed!"

@@ -1,0 +1,35 @@
+#!/bin/bash
+# script/server - Start development servers
+#
+# Runs Flask backend (port 5000) and Vite dev server (port 5173) concurrently.
+# In development, Flask serves HTML templates that load assets from Vite.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# Load environment
+if [ -f .env ]; then
+    export $(grep -v '^#' .env | xargs)
+fi
+
+export FLASK_APP=src/app:create_app
+
+echo "==> Starting development servers..."
+echo "    Flask: http://localhost:5000"
+echo "    Vite:  http://localhost:5173"
+echo ""
+
+# Run both servers concurrently
+# Uses & for background and wait to keep both running
+(cd frontend && npm run dev) &
+VITE_PID=$!
+
+flask run --host=0.0.0.0 --port=5000 &
+FLASK_PID=$!
+
+# Handle shutdown gracefully
+trap "kill $VITE_PID $FLASK_PID 2>/dev/null" EXIT
+
+# Wait for either to exit
+wait

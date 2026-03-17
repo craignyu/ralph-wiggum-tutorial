@@ -1,0 +1,19 @@
+#!/bin/bash
+# script/test - Run all tests
+#
+# Runs both Python (pytest) and JavaScript (vitest) tests.
+# Exits with non-zero if any tests fail.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Running Python tests..."
+pytest tests/ -v
+
+echo ""
+echo "==> Running JavaScript tests..."
+cd frontend && npm test
+
+echo ""
+echo "==> All tests passed!"

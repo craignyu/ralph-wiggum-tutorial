@@ -10,7 +10,9 @@
       "version": "16"
     }
   },
-  "postCreateCommand": "script/setup",
+  "onCreateCommand": "./.devcontainer/on-create.sh",
+  "updateContentCommand": "./.devcontainer/update-content.sh",
+  "postCreateCommand": "./.devcontainer/post-create.sh",
   "customizations": {
     "vscode": {
       "extensions": [
